@@ -4,19 +4,41 @@ import { useNavigation } from '@react-navigation/native';
 import { DrawerItemList, createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import OrderDetails from "./OrderDetails"
+import {
+    SimpleLineIcons,
+    MaterialIcons,
+    MaterialCommunityIcons,
+    FontAwesome
+  } from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
 
-
-
-
-const OrderCard = ({ orderNumber, description, openDate, directedDate }) => {
+const OrderCard = ({ 
+    orderNumber,
+     description, 
+     openDate, 
+     directedDate, 
+     cliente,
+    cliente_cep,
+    cliente_logradouro,
+    cliente_numero,
+    cliente_complemento,
+    cliente_bairro,
+    cliente_cidade,
+    cliente_estado,
+    cliente_telefone,
+    cliente_sindico,
+    os_solicitante,
+    os_consideracoes,
+    chamado_observacoes
+}) => {
     const navigation = useNavigation();
+   console.log('ana', cliente_estado)
 
     return (
 
         <View style={styles.card}>
-            <Text style={styles.orderNumber}>Ordem #{orderNumber}</Text>
+            <Text style={styles.orderNumber}><MaterialIcons name={"location-on"} size={20} color="#4E54C8" /> {cliente}</Text>
             <Text style={styles.subText}>
                 <Text style={styles.boldText}>Aberto dia:</Text>{" "}
                 <Text style={styles.lightText}>{openDate}</Text>
@@ -25,7 +47,19 @@ const OrderCard = ({ orderNumber, description, openDate, directedDate }) => {
                 <Text style={styles.boldText}>Direcionado dia:</Text>{" "}
                 <Text style={styles.lightText}>{directedDate}</Text>
             </Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OrderDetails', { orderNumber, description, openDate, directedDate })}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OrderDetails', 
+            { orderNumber, description, openDate, directedDate, cliente,  cliente_cep,
+                cliente_logradouro,
+                cliente_numero,
+                cliente_complemento,
+                cliente_bairro,
+                cliente_cidade,
+                cliente_estado,
+                cliente_telefone,
+                cliente_sindico,
+                os_solicitante,
+                os_consideracoes,
+                chamado_observacoes })}>
                 <Text style={styles.buttonText}>Acessar</Text>
             </TouchableOpacity>
         </View>
@@ -51,7 +85,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     orderNumber: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold',
     },
     subText: {

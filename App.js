@@ -136,7 +136,7 @@ export default function App() {
             name="OrderDetails"
             options={{
               headerShown: true,
-              drawerLabel: "Undefined",
+              drawerLabel: "Não clicar",
               title: "Detalhamento",
               drawerIcon: () => (
                 <SimpleLineIcons name="home" size={20} color="#4E54C8" />

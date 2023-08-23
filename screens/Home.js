@@ -55,9 +55,22 @@ export default function Home() {
             key={order.idChamado} // Certifique-se de ter um identificador único para cada ordem
             orderNumber={order.idChamado}
             description={order.idChamado}
-            openDate={order.chamadoDataReferencia}
-            directedDate={order.chamadoDataReferencia}
+            openDate={converterDataHora(order.chamado_direcionado)}
+            directedDate={converterDataHora(order.chamadoDataReferencia)}
             navigation={navigation}
+            cliente={order.chamado_cliente}
+            cliente_bairro={order.chamado_cliente_bairro}
+            cliente_cep={order.chamado_cliente_cep}
+            cliente_cidade={order.chamado_cliente_cidade}
+            cliente_complemento={order.chamado_cliente_complemento}
+            cliente_logradouro={order.chamado_cliente_logradouro}
+            cliente_numero={order.chamado_cliente_numero}
+            cliente_estado={order.chamado_cliente_estado}
+            cliente_telefone={order.chamado_cliente_telefone}
+            cliente_sindico={order.chamado_cliente_sindico}
+            os_consideracoes={order.chamado_cliente_consideracoesOs}
+            os_solicitante={order.chamado_cliente_solicitanteOs}
+            chamado_observacoes={order.chamado_observacoes}
           />
         ))}
       </ScrollView>
@@ -101,3 +114,27 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+function converterDataHora(dataHoraStr) {
+  // Dividir a string em data e hora
+  var partes = dataHoraStr.split(' ');
+  var dataStr = partes[0];
+  var horaStr = partes[1];
+
+  // Dividir a data em ano, mês e dia
+  var dataPartes = dataStr.split('-');
+  var ano = dataPartes[0];
+  var mes = dataPartes[1];
+  var dia = dataPartes[2];
+
+  // Formatar a data no formato desejado (dia/mês/ano)
+  var dataFormatada = dia + '/' + mes + '/' + ano;
+
+  // Formatar a hora no formato desejado
+  var horaFormatada = horaStr;
+
+  // Combinar data e hora formatadas
+  var dataHoraFormatada = dataFormatada + ' ' + horaFormatada;
+
+  return dataHoraFormatada;
+}
