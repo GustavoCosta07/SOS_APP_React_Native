@@ -9,16 +9,16 @@ import {
     MaterialIcons,
     MaterialCommunityIcons,
     FontAwesome
-  } from "@expo/vector-icons";
+} from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
 
-const OrderCard = ({ 
+const OrderCard = ({
     orderNumber,
-     description, 
-     openDate, 
-     directedDate, 
-     cliente,
+    description,
+    openDate,
+    directedDate,
+    cliente,
     cliente_cep,
     cliente_logradouro,
     cliente_numero,
@@ -30,10 +30,12 @@ const OrderCard = ({
     cliente_sindico,
     os_solicitante,
     os_consideracoes,
-    chamado_observacoes
+    chamado_observacoes,
+    os_status_nome,
+    chamado_status
 }) => {
     const navigation = useNavigation();
-   console.log('ana', cliente_estado)
+    console.log('ana', cliente_estado)
 
     return (
 
@@ -47,19 +49,41 @@ const OrderCard = ({
                 <Text style={styles.boldText}>Direcionado dia:</Text>{" "}
                 <Text style={styles.lightText}>{directedDate}</Text>
             </Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OrderDetails', 
-            { orderNumber, description, openDate, directedDate, cliente,  cliente_cep,
-                cliente_logradouro,
-                cliente_numero,
-                cliente_complemento,
-                cliente_bairro,
-                cliente_cidade,
-                cliente_estado,
-                cliente_telefone,
-                cliente_sindico,
-                os_solicitante,
-                os_consideracoes,
-                chamado_observacoes })}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.boldText}>Status:</Text>
+                <View style={{
+                    backgroundColor: chamado_status === '7' ? '#F2C2A1' : '#d9e4f1', // Altera a cor com base em chamado_status
+                    borderRadius: 5,
+                    borderWidth: 1,
+                    borderColor: chamado_status === '7' ? '#E4771F' : '#4E54C8', // Altera a cor da borda com base em chamado_status
+                    paddingVertical: 2,
+                    paddingHorizontal: 5,
+                    alignItems: 'center',
+                    marginLeft: 10,
+                }}>
+                    <Text style={[styles.lightText, { color: chamado_status === '7' ? '#A25E19' : '#4E54C8', fontWeight: 'Arial' }]}>
+                        {os_status_nome}
+                    </Text>
+                </View>
+            </View>
+
+
+
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OrderDetails',
+                {
+                    orderNumber, description, openDate, directedDate, cliente, cliente_cep,
+                    cliente_logradouro,
+                    cliente_numero,
+                    cliente_complemento,
+                    cliente_bairro,
+                    cliente_cidade,
+                    cliente_estado,
+                    cliente_telefone,
+                    cliente_sindico,
+                    os_solicitante,
+                    os_consideracoes,
+                    chamado_observacoes
+                })}>
                 <Text style={styles.buttonText}>Acessar</Text>
             </TouchableOpacity>
         </View>

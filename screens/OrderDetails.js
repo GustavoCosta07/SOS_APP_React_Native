@@ -17,27 +17,31 @@ const OrderDetails = ({ route }) => {
     chamado_observacoes
   } = route.params;
 
-  console.log('casa', route.params)
-
   const navigation = useNavigation();
 
   return (
-    // <Text style={styles.subText}>
-      
-    // </Text>
     <View style={styles.container}>
-      <View style={styles.sectionContainer}>
+      <View style={styles.infoContainer}>
         <Text style={styles.sectionTitle}>{cliente}</Text>
-        <Text style={styles.infoText}>{montarEndereco(cliente_logradouro, cliente_numero, cliente_bairro, cliente_complemento, cliente_cep, cliente_cidade, cliente_estado)}</Text>
-        <Text style={styles.infoText}>Telefone: {cliente_telefone}</Text>
-        <Text style={styles.infoText}>Síndico: {cliente_sindico}</Text>
+
+        <Text style={{ color: 'grey' }}>{montarEndereco(cliente_logradouro, cliente_numero, cliente_bairro,
+          cliente_complemento, cliente_cep, cliente_cidade, cliente_estado)}</Text>
+        <View style={{ height: 10 }} />
+        <InfoPair label="Telefone:" value={cliente_telefone} />
+        <InfoPair label="Síndico:" value={cliente_sindico} />
       </View>
-      <View style={styles.sectionContainer}>
+      <View style={styles.infoContainer}>
         <Text style={styles.sectionTitle}>Outras Informações</Text>
-        <Text style={styles.infoText}>Solicitante: {os_solicitante}</Text>
-        <Text style={styles.infoText}>Informações Iniciais: {os_consideracoes}</Text>
-        <Text style={styles.infoText}>Observações: {chamado_observacoes}</Text>
+        <InfoPair label="Solicitante:" value={os_solicitante} />
+        <View style={{ height: 10 }} />
+        <Text style={styles.sectionTitle}>Informações Iniciais:</Text>
+        <Text style={{ color: 'grey' }}>{os_consideracoes}</Text>
+        <View style={{ borderBottomWidth: 1, borderBottomColor: 'grey', marginVertical: 10 }} />
+        <Text style={styles.sectionTitle}>Observações:</Text>
+        <Text style={{ color: 'grey' }}>{chamado_observacoes}</Text>
       </View>
+
+
       <TouchableOpacity style={styles.startButton} onPress={() => alert('Iniciar Atendimento Pressionado')}>
         <Text style={styles.startButtonText}>Iniciar Atendimento</Text>
       </TouchableOpacity>
@@ -45,27 +49,51 @@ const OrderDetails = ({ route }) => {
   );
 };
 
+const InfoPair = ({ label, value }) => (
+  <View style={styles.infoPair}>
+    <Text style={styles.infoLabel}>{label}</Text>
+    {label === 'Solicitante:' ? (
+      <Text style={[styles.infoValue]}>{value}</Text>
+    ) : (
+      <Text style={styles.infoValue}>{value}</Text>
+    )}
+  </View>
+);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
   },
-  sectionContainer: {
+  infoContainer: {
     backgroundColor: '#f7f7f7',
     borderRadius: 10,
     padding: 20,
     marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
     color: "#4E54C8"
   },
-  infoText: {
-    fontSize: 16,
+  infoPair: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 5,
+  },
+  infoLabel: {
+    fontWeight: 'bold',
+    marginRight: 5,
+    color: "grey"
+  },
+  infoSpacer: {
+    marginRight: 5,
+  },
+  infoValue: {
+    flex: 1,
+    color: "grey"
   },
   startButton: {
     backgroundColor: '#4E54C8',
@@ -80,6 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
 
 
 function montarEndereco(cliente_logradouro, cliente_numero, cliente_bairro, cliente_complemento, cliente_cep, cliente_cidade, cliente_estado) {

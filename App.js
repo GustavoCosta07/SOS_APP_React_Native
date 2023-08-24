@@ -19,6 +19,7 @@ import { UserProvider } from './UserContext';
 import Sair from "./screens/Sair";
 import React, { useContext } from 'react';
 import { UserContext } from './UserContext';
+import DrawerContent from './DrawerContent';
 
 
 const Drawer = createDrawerNavigator();
@@ -28,7 +29,6 @@ export default function App() {
   
   const user  = useContext(UserContext);
   
-  console.log('pa',user)
 
   return (
     <UserProvider>
@@ -65,7 +65,7 @@ export default function App() {
                         fontWeight: "bold",
                         color: "#111"
                       }}
-                    >Gustavo</Text>
+                    >Marcelo W E Gomes!</Text>
                     <Text
                       style={{
                         fontSize: 16,
@@ -110,7 +110,7 @@ export default function App() {
           <Drawer.Screen
             name="Settings"
             options={{
-              drawerLabel: "Settings",
+              drawerLabel: "Configurações",
               title: "Settings",
               drawerIcon: () => (
                 <SimpleLineIcons name="settings" size={20} color="#4E54C8" />

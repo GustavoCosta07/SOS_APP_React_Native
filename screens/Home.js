@@ -71,6 +71,8 @@ export default function Home() {
             os_consideracoes={order.chamado_cliente_consideracoesOs}
             os_solicitante={order.chamado_cliente_solicitanteOs}
             chamado_observacoes={order.chamado_observacoes}
+            os_status_nome={order.os_status_nome}
+            chamado_status={order.chamado_status}
           />
         ))}
       </ScrollView>
